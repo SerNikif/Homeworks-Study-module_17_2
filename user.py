@@ -1,6 +1,8 @@
-from app.backend.db import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
+from sqlalchemy.schema import CreateTable
+
+from app.backend.db import Base
 
 
 class User(Base):
@@ -12,9 +14,7 @@ class User(Base):
     lastname = Column(String)
     age = Column(Integer)
     slug = Column(String, unique=True, index=True)
-
     task = relationship('Task', back_populates='user')
 
 
-from sqlalchemy.schema import CreateTable
 print(CreateTable(User.__table__))
